@@ -1,23 +1,20 @@
-import logo from './logo.svg';
+import { useState } from 'react';
+import TaskForm from './components/TaskForm';
+import TaskList from './components/TaskList';
 import './App.css';
 
 function App() {
+  const [refreshKey, setRefreshKey] = useState(0);
+
+  const refreshTasks = () => {
+    setRefreshKey((oldKey) => oldKey + 1);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>To-Do List</h1>
+      <TaskForm refreshTasks={refreshTasks} />
+      <TaskList refreshKey={refreshKey} />
     </div>
   );
 }
